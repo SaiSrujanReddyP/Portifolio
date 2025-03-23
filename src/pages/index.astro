@@ -1,0 +1,143 @@
+---
+import MainLayout from "~/layouts/MainLayout.astro";
+
+import Intro from "~/components/Intro.tsx";
+import Resume from "~/components/Resume.tsx";
+import Contacts from "~/components/Contact.tsx";
+import Game from "~/components/GameGit.tsx";
+import DevelopedBy from "~/components/DevelopedBy.tsx";
+import World from "~/components/Globe.tsx";
+import Projects from "~/components/Projects.tsx";
+import Socials from "~/components/Socials.tsx";
+import Blog from "~/components/Blog.tsx";
+
+const globeConfig = {
+  pointSize: 1,
+  globeColor: "#062056",
+  showAtmosphere: true,
+  atmosphereColor: "#ffffff",
+  atmosphereAltitude: 0.3,
+  emissive: "#062056",
+  emissiveIntensity: 0.1,
+  shininess: 0.9,
+  polygonColor: "rgba(255,255,255,0.7)",
+  ambientLight: "#ffffff",
+  directionalLeftLight: "#ffffff",
+  directionalTopLight: "#ffffff",
+  pointLight: "#ffffff",
+  arcTime: 1000,
+  arcLength: 0.9,
+  rings: 1,
+  maxRings: 7,
+  autoRotate: true,
+  autoRotateSpeed: 0.5,
+};
+
+const data = [
+  { order: 1, startLat: 40.7128, startLng: -74.0060, endLat: 51.5074, endLng: -0.1278, arcAlt: 0.3, color: "#02f5dd" },   // New York to London
+  { order: 2, startLat: 34.0522, startLng: -118.2437, endLat: 35.6895, endLng: 139.6917, arcAlt: 0.5, color: "#02f5dd" }, // Los Angeles to Tokyo
+  { order: 3, startLat: 48.8566, startLng: 2.3522, endLat: 55.7558, endLng: 37.6173, arcAlt: 0.4, color: "#02f5dd" },    // Paris to Moscow
+  { order: 4, startLat: 37.7749, startLng: -122.4194, endLat: 1.3521, endLng: 103.8198, arcAlt: 0.6, color: "#02f5dd" }, // San Francisco to Singapore
+  { order: 5, startLat: -33.8688, startLng: 151.2093, endLat: -23.5505, endLng: -46.6333, arcAlt: 0.7, color: "#02f5dd" },// Sydney to São Paulo
+  { order: 6, startLat: 28.6139, startLng: 77.2090, endLat: 19.0760, endLng: 72.8777, arcAlt: 0.2, color: "#02f5dd" },   // New Delhi to Mumbai
+  { order: 7, startLat: 39.9042, startLng: 116.4074, endLat: 55.6761, endLng: 12.5683, arcAlt: 0.35, color: "#02f5dd" }, // Beijing to Copenhagen
+  { order: 8, startLat: -26.2041, startLng: 28.0473, endLat: -34.6037, endLng: -58.3816, arcAlt: 0.45, color: "#02f5dd" },// Johannesburg to Buenos Aires
+  { order: 9, startLat: 40.7306, startLng: -73.9352, endLat: 41.9028, endLng: 12.4964, arcAlt: 0.25, color: "#02f5dd" }, // New York City to Rome
+  { order: 10, startLat: 52.5200, startLng: 13.4050, endLat: -37.8136, endLng: 144.9631, arcAlt: 0.55, color: "#02f5dd" },// Berlin to Melbourne
+  { order: 11, startLat: 19.4326, startLng: -99.1332, endLat: 4.7110, endLng: -74.0721, arcAlt: 0.4, color: "#02f5dd" },  // Mexico City to Bogotá
+  { order: 12, startLat: 35.6762, startLng: 139.6503, endLat: 37.5665, endLng: 126.9780, arcAlt: 0.6, color: "#02f5dd" }, // Tokyo to Seoul
+  { order: 13, startLat: 33.8688, startLng: 151.2093, endLat: -31.9505, endLng: 115.8605, arcAlt: 0.2, color: "#02f5dd" },// Sydney to Perth
+  { order: 14, startLat: -34.6037, startLng: -58.3816, endLat: -22.9068, endLng: -43.1729, arcAlt: 0.3, color: "#02f5dd" },// Buenos Aires to Rio de Janeiro
+  { order: 15, startLat: 41.3851, startLng: 2.1734, endLat: 48.2082, endLng: 16.3738, arcAlt: 0.5, color: "#02f5dd" },    // Barcelona to Vienna
+  { order: 16, startLat: 22.3964, startLng: 114.1095, endLat: 1.290270, endLng: 103.851959, arcAlt: 0.35, color: "#02f5dd" }, // Hong Kong to Singapore
+  { order: 17, startLat: 37.9838, startLng: 23.7275, endLat: 41.0082, endLng: 28.9784, arcAlt: 0.4, color: "#02f5dd" },    // Athens to Istanbul
+  { order: 18, startLat: 13.7563, startLng: 100.5018, endLat: -6.2088, endLng: 106.8456, arcAlt: 0.25, color: "#02f5dd" }, // Bangkok to Jakarta
+  { order: 19, startLat: -1.2921, startLng: 36.8219, endLat: -26.2041, endLng: 28.0473, arcAlt: 0.3, color: "#02f5dd" },   // Nairobi to Johannesburg
+  { order: 20, startLat: 35.6895, startLng: 139.6917, endLat: 52.2297, endLng: 21.0122, arcAlt: 0.5, color: "#02f5dd" },   // Tokyo to Warsaw
+  { order: 21, startLat: 25.276987, startLng: 55.296249, endLat: 23.129110, endLng: 113.264385, arcAlt: 0.6, color: "#02f5dd" }, // Dubai to Guangzhou
+  { order: 22, startLat: 45.4654, startLng: 9.1859, endLat: 43.7696, endLng: 11.2558, arcAlt: 0.3, color: "#02f5dd" },    // Milan to Florence
+  { order: 23, startLat: 55.6761, startLng: 12.5683, endLat: 59.9343, endLng: 30.3351, arcAlt: 0.4, color: "#02f5dd" },   // Copenhagen to Saint Petersburg
+  { order: 24, startLat: 60.1695, startLng: 24.9354, endLat: 59.4370, endLng: 24.7536, arcAlt: 0.2, color: "#02f5dd" },   // Helsinki to Tallinn
+  { order: 25, startLat: 55.7558, startLng: 37.6173, endLat: 41.7151, endLng: 44.8271, arcAlt: 0.3, color: "#02f5dd" },   // Moscow to Tbilisi
+  { order: 26, startLat: 31.2304, startLng: 121.4737, endLat: 39.9042, endLng: 116.4074, arcAlt: 0.4, color: "#02f5dd" }, // Shanghai to Beijing
+  { order: 27, startLat: 19.075984, startLng: 72.877656, endLat: 40.416775, endLng: -3.703790, arcAlt: 0.6, color: "#02f5dd" }, // Mumbai to Madrid
+  { order: 28, startLat: 30.044420, startLng: 31.235712, endLat: 41.902784, endLng: 12.496366, arcAlt: 0.5, color: "#02f5dd" }, // Cairo to Rome
+  { order: 29, startLat: 45.5017, startLng: -73.5673, endLat: 51.1657, endLng: 10.4515, arcAlt: 0.4, color: "#02f5dd" },   // Montreal to Germany
+  { order: 30, startLat: 35.6762, startLng: 139.6503, endLat: 55.7558, endLng: 37.6173, arcAlt: 0.6, color: "#02f5dd" },  // Tokyo to Moscow
+];
+
+
+---
+
+<MainLayout>
+  <main
+    class="grid grid-cols-1 gap-3 list-none lg:grid-cols-3 lg:grid-rows-3 xl:grid-cols-4 xl:grid-rows-4 my-5 mx-5"
+  >
+    <div class="card lg:row-span-2 ring-1  h-[100vh] p-8 ">
+      <Intro client:idle />
+    </div>
+    <div class="card ring-1   justify-between  h-[50vh] flex flex-col p-8 ">
+      <DevelopedBy client:idle />
+    </div>
+    <div class="card ring-1 lg:row-span-2 hidden h-[100vh] sm:flex flex-col  lg:row-start-2 md:grid-cols-2 md:grid lg:gap-0 md:items-center md:gap-12 lg:grid-cols-none lg:col-start-2 lg:col-span-2 p-8  ">
+      <Game client:only />
+      
+    </div>
+
+    <div class="card ring-1 h-[50vh] ring-primary/5 flex flex-col justify-between items-center  shadow-xl dark:shadow-thick p-8 overflow-hidden text-center lg:text-left">
+      <Resume client:idle/>
+    </div>
+    <div class="card ring-1 md:mt-[-0.75rem] lg:row-start-3 items-center h-[50vh] flex p-8 flex-col justify-center  relative  overflow-hidden ">
+      <Socials />
+    </div>
+    <div class="card lg:row-span-2 h-[100vh] ring-1 p-8 relative overflow-hidden">
+      <Projects client:load />
+    </div>
+    <div class="card ring-1 md:mt-[-0.75rem] flex flex-col p-8 h-[50vh] justify-center items-center  overflow-hidden relative lg:col-span-2 lg:row-start-4 ">
+      <Contacts />
+    </div>
+    <div class="card lg:col-span-2 md:mt-[-0.75rem] xl:col-span-1 h-[calc(100vh+0.75rem)] flex flex-col  lg:row-span-2 ring-1 p-8">
+      
+      <Blog />
+    </div>
+    <div
+    class="card lg:col-span-1 ring-1 md:mt-[-0.75rem] p-8 lg:row-start-4 h-[50vh] flex flex-col justify-center"
+  >
+    <World client:only="react" globeConfig={globeConfig} data={data} />
+  </div>
+      
+  </main>
+</MainLayout>
+
+<style>
+  .card {
+    z-index: 1;
+    position: relative;
+    border: 1px solid transparent;
+    border-radius: 2rem;
+    background:
+      padding-box linear-gradient(rgb(var(--neutral-2)), rgb(var(--neutral-2))),
+      border-box linear-gradient(rgb(var(--neutral-4)), rgb(var(--neutral-3) / 0.5));
+    overflow: hidden;
+
+    @apply transition ring-2 ring-offset-0 ring-neutral-5 ring-offset-neutral-1;
+
+    &:hover {
+      @apply ring-offset-2 lg:ring-offset-4;
+    }
+  }
+
+  .card::after {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url("/nnnoise.svg");
+    overflow: hidden;
+  }
+</style>
+
+  

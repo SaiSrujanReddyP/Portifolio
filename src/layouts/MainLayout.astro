@@ -1,0 +1,20 @@
+---
+import HTML from "~/components/HTML.astro";
+import Loader from "~/components/loader.astro";
+
+type Props = {
+  title?: string;
+  description?: string;
+};
+
+const { title, description } = Astro.props;
+---
+
+<HTML {title} {description}>
+  
+  <Fragment slot="body">
+    <Loader />
+    <slot />
+    
+  </Fragment>
+</HTML>
