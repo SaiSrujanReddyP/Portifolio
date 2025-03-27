@@ -15,7 +15,7 @@ export default () => {
             </a>
           </p>
           <p className="text-zinc-500">
-            a.k.a Ir0nw0lf
+            a.k.a omnsicientchaos
           </p>
         </div>
       </div>

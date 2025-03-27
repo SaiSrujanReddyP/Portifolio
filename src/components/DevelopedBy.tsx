@@ -2,7 +2,7 @@ import  { useEffect, useState } from "react";
 import { useTrail, animated } from "@react-spring/web";
 import '../styles/globals.css';
 
-const text = "Ir0nw0lf".split("");
+const text = "omniscientchaos".split("");
 const titles = ["CTF Player", "Web Enthusiast", "Fullstack Developer"];
 
 const CoolTextAnimation = () => {
